@@ -1,11 +1,14 @@
 import { cn } from '@/lib/utils';
-import { ChevronLeft, MenuIcon } from 'lucide-react'
+import { ChevronLeft, MenuIcon, PlusCircle, Search, Settings } from 'lucide-react'
 import { usePathname } from 'next/navigation';
 import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts';
 import UserItem from './UserItem';
-import { useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
+import Item from './Item';
+import { toast } from 'sonner';
+import DocumentList from './DocumentList';
 
 const Navigation = (
     //     {
@@ -27,7 +30,7 @@ const Navigation = (
     const [isResetting, setIsResetting] = useState(false)
     const [isCollapsed, setIsCollapsed] = useState(isMobile)
 
-    const documents = useQuery(api.documents.get)
+    const create = useMutation(api.documents.create)
 
     useEffect(() => {
         if (isMobile) {
@@ -113,6 +116,16 @@ const Navigation = (
         }, 300);
     }
 
+    const handleCreate = () => {
+        const pr = create({ title: 'Untitled' })
+
+        toast.promise(pr, {
+            loading: 'Creating a new note...',
+            success: 'New note created',
+            error: 'Failed to create a new note'
+        })
+    }
+
     return (
         <>
             {/* overflow-y-auto  */}
@@ -135,12 +148,25 @@ const Navigation = (
                 </div>
                 <div>
                     <UserItem />
+                    <Item
+                        onClick={() => {}}
+                        label='Search'
+                        isSearch
+                        icon={Search}
+                    />
+                    <Item
+                        onClick={() => {}}
+                        label='Settings'
+                        icon={Settings}
+                    />
+                    <Item
+                        onClick={handleCreate}
+                        label='New page'
+                        icon={PlusCircle}
+                    />
                 </div>
                 <div className='m-4'>
-                    {documents?.map((document) => (
-                        <p key={document._id}>{document.title}</p> 
-                    ))}
-                    {/* <p>Documents</p> */}
+                    <DocumentList />
                 </div>
                 <div
                     onMouseDown={handleMouseDown}
