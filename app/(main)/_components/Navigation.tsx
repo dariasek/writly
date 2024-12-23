@@ -12,6 +12,7 @@ import DocumentList from './DocumentList';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import Trashbox from './Trashbox';
 import { useSearch } from '@/hooks/use-search';
+import { useSettings } from '@/hooks/use-settings';
 
 const Navigation = (
     //     {
@@ -27,6 +28,8 @@ const Navigation = (
     const pathname = usePathname()
 
     const search = useSearch()
+    const settings = useSettings()
+
     const isMobile = useMediaQuery('(max-width: 768px)')
     const isResizingRef = useRef(false);
     const sidebarRef = useRef<HTMLElement>(null)
@@ -160,7 +163,7 @@ const Navigation = (
                         icon={Search}
                     />
                     <Item
-                        onClick={() => {}}
+                        onClick={settings.onOpen}
                         label='Settings'
                         icon={Settings}
                     />

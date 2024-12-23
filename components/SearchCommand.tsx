@@ -45,7 +45,7 @@ const SearchCommand = () => {
         }
     }, [toggle])
     
-
+    // TODO: double check hydration error
     if (!isMounted) {
         return null
     }
