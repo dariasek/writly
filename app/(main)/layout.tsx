@@ -7,6 +7,7 @@ import Navigation from "./_components/Navigation"
 import { useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import { cn } from "@/lib/utils"
+import SearchCommand from "@/components/SearchCommand"
 
 const MainLayout = ({
     children
@@ -42,6 +43,7 @@ const MainLayout = ({
                 // 'transition-all ease-in-out duration-300',
                 // isMobile && !isNavigationCollapsed && 'w-0',
             )}>
+                <SearchCommand />
                 {children}
             </main>
         </div>

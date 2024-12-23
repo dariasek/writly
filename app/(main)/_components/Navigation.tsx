@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import DocumentList from './DocumentList';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import Trashbox from './Trashbox';
+import { useSearch } from '@/hooks/use-search';
 
 const Navigation = (
     //     {
@@ -25,6 +26,7 @@ const Navigation = (
 ) => {
     const pathname = usePathname()
 
+    const search = useSearch()
     const isMobile = useMediaQuery('(max-width: 768px)')
     const isResizingRef = useRef(false);
     const sidebarRef = useRef<HTMLElement>(null)
@@ -47,6 +49,7 @@ const Navigation = (
             collapse()
         }
     }, [isMobile, pathname])
+
 
     // useEffect(() => {
     //     setIsNavigationCollapsed(isCollapsed)
@@ -151,7 +154,7 @@ const Navigation = (
                 <div>
                     <UserItem />
                     <Item
-                        onClick={() => {}}
+                        onClick={search.onOpen}
                         label='Search'
                         isSearch
                         icon={Search}
