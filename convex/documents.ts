@@ -180,3 +180,58 @@ export const getSearch = query({
         return result
     }
 })
+
+export const getById = query({
+    args: {
+        id: v.id('documents')
+    },
+    async handler(ctx, args) {
+        const { userId } = await getUserId(ctx)
+        const document = await ctx.db.get(args.id)
+
+        if (!document) {
+            throw new Error('Not found')
+        }
+
+        if (document.isPublished && !document.isArchived) {
+            return document
+        }
+
+        if (document.userId !== userId) {
+            throw new Error('Unauthorized')
+        } else {
+            return document
+        }
+    }
+})
+
+
+export const update = mutation({
+    args: {
+        id: v.id('documents'),
+        title: v.optional(v.string()),
+        content: v.optional(v.string()),
+        coverImage: v.optional(v.string()),
+        icon: v.optional(v.string()),
+        isPublished: v.optional(v.boolean()),
+    },
+    async handler(ctx, args) {
+        const { userId } = await getUserId(ctx)
+
+        const { id, ...argsToUpdate } = args
+
+        const document = await ctx.db.get(id)
+
+        if (!document) {
+            throw new Error('Not found')
+        } 
+
+        if (document.userId !== userId) {
+            throw new Error('Unauthorized')
+        }
+
+        const documentUpdated = await ctx.db.patch(id, argsToUpdate)
+
+        return documentUpdated
+    }
+})

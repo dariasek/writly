@@ -61,7 +61,7 @@ const Item = ({
                 onExpand?.()
             }
 
-            router.push(`/documents/${res}`)
+            router.push(`/document/${res}`)
         })
 
         toast.promise(pr, {
