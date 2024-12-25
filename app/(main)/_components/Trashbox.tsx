@@ -48,7 +48,7 @@ const Trashbox = () => {
         })
 
         if (params.documentId === documentId) {
-            router.push('/documents')
+            router.push('/document')
         }
     }
 

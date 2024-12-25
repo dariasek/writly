@@ -41,7 +41,7 @@ const Navbar = () => {
           isAuthenticated && !isLoading && (
             <>
               <Button variant='ghost' size='sm' asChild>
-                <Link href='/documents'>
+                <Link href='/document'>
                   Enter Writly
                 </Link>
               </Button>
