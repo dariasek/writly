@@ -75,7 +75,7 @@ const Item = ({
         e.stopPropagation()
         if (!id) return
 
-        const pr = archive({ id })
+        const pr = archive({ id }).then(() => router.push('/document/'))
 
         toast.promise(pr, {
             loading: 'Moving to trash...',

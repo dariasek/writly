@@ -39,7 +39,7 @@ const MainLayout = ({
             />
             {/*flex-1  overflow-y-auto */}
             <main className={cn(
-                'flex-1 h-full overflow-hidden ',
+                'flex-1 h-full overflow-y-auto',
                 // 'transition-all ease-in-out duration-300',
                 // isMobile && !isNavigationCollapsed && 'w-0',
             )}>

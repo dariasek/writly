@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { ChevronLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from 'lucide-react'
-import { useParams, usePathname } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts';
 import UserItem from './UserItem';
@@ -28,6 +28,7 @@ const Navigation = (
 ) => {
     const pathname = usePathname()
     const params = useParams()
+    const router = useRouter()
 
     const search = useSearch()
     const settings = useSettings()
@@ -128,6 +129,9 @@ const Navigation = (
 
     const handleCreate = () => {
         const pr = create({ title: 'Untitled' })
+            .then((documentId) => {
+                router.push(`/documents/${documentId}`)
+            })
 
         toast.promise(pr, {
             loading: 'Creating a new note...',
