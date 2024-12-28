@@ -4,8 +4,6 @@ import { Spinner } from "@/components/spinner"
 import { useConvexAuth } from "convex/react"
 import { redirect } from "next/navigation"
 import Navigation from "./_components/Navigation"
-import { useState } from "react"
-import { useMediaQuery } from "usehooks-ts"
 import { cn } from "@/lib/utils"
 import SearchCommand from "@/components/SearchCommand"
 

@@ -13,7 +13,6 @@ import { Id } from '@/convex/_generated/dataModel'
 import { useUser } from '@clerk/clerk-react'
 import { useMutation } from 'convex/react'
 import { MoreHorizontal, Trash } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import React from 'react'
 import { toast } from 'sonner'
 
@@ -22,7 +21,6 @@ const Menu = ({
 }: {
     documentId: Id<'documents'>
 }) => {
-    const router = useRouter()
     const { user } = useUser()
 
 

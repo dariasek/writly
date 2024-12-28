@@ -1,10 +1,9 @@
 "use client"
 
-import { useUser } from '@clerk/clerk-react'
 import { useQuery } from 'convex/react'
 import { File } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import React, { KeyboardEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     CommandDialog,
     CommandEmpty,
@@ -17,7 +16,6 @@ import { useSearch } from '@/hooks/use-search'
 import { api } from '@/convex/_generated/api'
 
 const SearchCommand = () => {
-    const { user } = useUser()
     const router = useRouter()
     const documents = useQuery(api.documents.getSearch)
     const [isMounted, setIsMounted] = useState(false)
@@ -57,7 +55,7 @@ const SearchCommand = () => {
     return (
         <CommandDialog open={isOpen} onOpenChange={onClose} >
             <CommandInput />
-            <CommandList placeholder={`Search ${user?.fullName}'s Writly...`} >
+            <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
                 <CommandGroup heading='Documents'>
                     {

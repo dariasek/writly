@@ -10,11 +10,6 @@ import dynamic from 'next/dynamic'
 import { useParams } from 'next/navigation'
 import React, { useMemo } from 'react'
 
-interface DocumentPageProps {
-  params: {
-    documentId: Id<'documents'>
-  }
-}
 
 const DocumentPage = () => {
   const params = useParams()

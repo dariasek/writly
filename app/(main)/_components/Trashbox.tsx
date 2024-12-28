@@ -6,7 +6,7 @@ import { Id } from '@/convex/_generated/dataModel'
 import { useMutation, useQuery } from 'convex/react'
 import { Search, Trash, Undo } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import { toast } from 'sonner'
 import ConfirmModal from './modals/ConfirmModal'
 

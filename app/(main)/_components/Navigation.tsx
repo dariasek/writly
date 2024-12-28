@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { ChevronLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from 'lucide-react'
 import { useParams, usePathname, useRouter } from 'next/navigation';
-import React, { MouseEvent, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts';
 import UserItem from './UserItem';
 import { useMutation } from 'convex/react';
@@ -42,20 +42,6 @@ const Navigation = (
 
     const create = useMutation(api.documents.create)
 
-    useEffect(() => {
-        if (isMobile) {
-            collapse()
-        } else {
-            resetWidth()
-        }
-    }, [isMobile])
-
-    useEffect(() => {
-        if (isMobile) {
-            collapse()
-        }
-    }, [isMobile, pathname])
-
 
     // useEffect(() => {
     //     setIsNavigationCollapsed(isCollapsed)
@@ -84,10 +70,10 @@ const Navigation = (
         isResizingRef.current = false
 
         document.removeEventListener('mousemove', handleMouseMove)
-        document.removeEventListener('mouseup', handleMouseUp)
+        document.removeEventListener('mouseup', handleMouseUp as EventListener)
     }
 
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault()
         e.stopPropagation()
 
@@ -139,6 +125,20 @@ const Navigation = (
             error: 'Failed to create a new note'
         })
     }
+
+    useEffect(() => {
+        if (isMobile) {
+            collapse()
+        } else {
+            resetWidth()
+        }
+    }, [isMobile,resetWidth])
+
+    useEffect(() => {
+        if (isMobile) {
+            collapse()
+        }
+    }, [isMobile, pathname])
 
     return (
         <>
