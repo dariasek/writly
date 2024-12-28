@@ -186,7 +186,6 @@ export const getById = query({
         id: v.id('documents')
     },
     async handler(ctx, args) {
-        const { userId } = await getUserId(ctx)
         const document = await ctx.db.get(args.id)
 
         if (!document) {
@@ -196,6 +195,8 @@ export const getById = query({
         if (document.isPublished && !document.isArchived) {
             return document
         }
+
+        const { userId } = await getUserId(ctx)
 
         if (document.userId !== userId) {
             throw new Error('Unauthorized')
