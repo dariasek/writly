@@ -116,7 +116,7 @@ const Navigation = (
     const handleCreate = () => {
         const pr = create({ title: 'Untitled' })
             .then((documentId) => {
-                router.push(`/documents/${documentId}`)
+                router.push(`/document/${documentId}`)
             })
 
         toast.promise(pr, {
