@@ -129,14 +129,6 @@ const Navigation = (
     useEffect(() => {
         if (isMobile) {
             collapse()
-        } else {
-            resetWidth()
-        }
-    }, [isMobile,resetWidth])
-
-    useEffect(() => {
-        if (isMobile) {
-            collapse()
         }
     }, [isMobile, pathname])
 
